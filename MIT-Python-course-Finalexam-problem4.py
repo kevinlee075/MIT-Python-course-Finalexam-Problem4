@@ -9,23 +9,32 @@ def largest_odd_times(L):
     """ Assumes L is a non-empty list of ints
         Returns the largest element of L that occurs an odd number 
         of times in L. If no such element exists, returns None """
-    temp_odd = 0
+    checking_list = L.copy()
     
-    largest_odd = 0
+    result = 0
     
-    for num in L:
+    while len(checking_list) > 0:
         
-        if num % 2 != 0:
+        largest_elem = max(checking_list)
+        
+        if checking_list.count(largest_elem) % 2 > 0:
             
-            temp_odd = num
+            result = largest_elem
             
-            if temp_odd > largest_odd:
+            break
+            
+        else:
+            
+            for i in range(len(checking_list)):
                 
-                largest_odd = temp_odd
-    
-    if largest_odd > 0:
+                if checking_list[i] == largest_elem:
+                    
+                    checking_list.remove(checking_list[i])
+            
+    if len(checking_list) > 0:
         
-        return largest_odd
+        return result
     
     else:
+        
         return None
